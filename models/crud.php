@@ -29,6 +29,20 @@
       $stmt -> close();
     }
     #--------------------------------------------------
+    #Intentos usuario -----------------------------
+    public function intentosUsuarioModel($datosModel, $tabla){
+      $stmt = Connection::connect()->prepare("UPDATE $tabla SET intentos = :intentos WHERE usuario = :usuario");
+  		$stmt->bindParam(":intentos", $datosModel["actualizarintentos"], PDO::PARAM_INT);
+  		$stmt->bindParam(":usuario", $datosModel["usuarioactual"], PDO::PARAM_STR);
+  		if($stmt->execute()){
+  			return "success";
+  		}
+  		else{
+  			return "error";
+  		}
+      $stmt -> close();
+    }
+    #---------------------------------------------------
     #Vista usuarios------------------------------------
     public function vistaUsuariosModel($tabla){
       $stmt = Connection::connect()->prepare("SELECT id, usuario, password, email FROM $tabla");
@@ -74,17 +88,10 @@
       if($stmt->execute()){
   			return "success";
   		}
-
   		else{
   			return "error";
   		}
-
   		$stmt->close();
-
     }
-
-
-
-
   }
 ?>

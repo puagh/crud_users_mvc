@@ -11,6 +11,10 @@ class Paginas{
 			$module = "views/modules/ingresar.php";
 		}
 
+		elseif($enlaces == "fallo3intentos"){
+			$module = "views/modules/ingresar.php";
+		}
+
 		elseif($enlaces == "cambio"){
 			$module = "views/modules/usuarios.php";
 		}
@@ -18,7 +22,7 @@ class Paginas{
 		else{
 			$module =  "views/modules/registro.php";
 		}
-		
+
 		return $module;
 	}
 }

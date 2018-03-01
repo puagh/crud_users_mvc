@@ -61,13 +61,11 @@ class MvcController{
 
 					$cifrar = crypt($_POST["passwordInicio"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-					$datosController = array('usuario' => $_POST["usuarioInicio"] ,
-												 					 'password' => $cifrar);
+					$datosController = array('usuario' => $_POST["usuarioInicio"], 'password' => $cifrar);
 
 					$respuesta = Data::ingresoUsuarioModel($datosController, "usuarios");
-
 					$intentos = $respuesta["intentos"];
-
+					$usuario = $_POST["usuarioInicio"];
 					$maximo_intentos = 2;
 
 					if($intentos <= $maximo_intentos){
@@ -77,15 +75,30 @@ class MvcController{
 							session_start();
 							#Creación de las variables de sesión
 							$_SESSION["validar"] = true;
+
+							#Regreso a 0 intentos si el usuario inicia sesión correctamente
+							$intentos = 0;
+							$datosController = array("usuarioactual" => $usuario, "actualizarintentos" => $intentos);
+							$respuestaActualizarIntentos = Data::intentosUsuarioModel($datosController, "usuarios");
+
 							#Redireccionamiento
 							header("location:index.php?action=usuarios");
 						}
 						else {
 							++$intentos;		//Incremento de la variable intentos si el usuario no ingresa correctamente usuario y contraseña
-							header("location:index.php?action=falloInicio");
+							$datosController = array("usuarioactual" => $usuario, "actualizarintentos" => $intentos);
+							$respuestaActualizarIntentos = Data::intentosUsuarioModel($datosController, "usuarios");
+ 							header("location:index.php?action=falloInicio");
 						}
 					}
 
+					#Si el usuario hace más de 3 intentos fallidos de inicio de sesión
+					else{
+						$intentos = 0;
+						$datosController = array("usuarioactual" => $usuario, "actualizarintentos" => $intentos);
+						$respuestaActualizarIntentos = Data::intentosUsuarioModel($datosController, "usuarios");
+						header("location:index.php?action=fallo3intentos");
+					}
 				}
 			}
 		}

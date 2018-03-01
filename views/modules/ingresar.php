@@ -17,4 +17,8 @@
 	if(isset($_GET["action"]) && $_GET["action"] == "falloInicio"){
 		echo "usuario y/o contraseña no válidos";
 	}
+
+	if(isset($_GET["action"]) && $_GET["action"] == "fallo3intentos"){
+		echo "Por favor complete el captcha";
+	}
 	?>
