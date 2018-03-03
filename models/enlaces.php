@@ -7,6 +7,10 @@ class Paginas{
 			$module =  "views/modules/".$enlaces.".php";
 		}
 
+		else if($enlaces == "index"){
+			$module = "views/modules/registro.php";
+		}
+
 		elseif($enlaces == "falloInicio"){
 			$module = "views/modules/ingresar.php";
 		}
@@ -26,5 +30,3 @@ class Paginas{
 		return $module;
 	}
 }
-
-?>

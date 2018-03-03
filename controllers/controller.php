@@ -43,10 +43,10 @@ class MvcController{
 				$respuesta = Data::registroUsuarioModel($datosController, "usuarios");
 
 				if($respuesta == "success"){
-					header("location:index.php?action=ok");
+					header("location:ok");
 				}
 				else{
-					header("location:index.php");
+					header("location:index");
 				}
 			}
 		}
@@ -82,13 +82,13 @@ class MvcController{
 							$respuestaActualizarIntentos = Data::intentosUsuarioModel($datosController, "usuarios");
 
 							#Redireccionamiento
-							header("location:index.php?action=usuarios");
+							header("location:usuarios");
 						}
 						else {
 							++$intentos;		//Incremento de la variable intentos si el usuario no ingresa correctamente usuario y contraseña
 							$datosController = array("usuarioactual" => $usuario, "actualizarintentos" => $intentos);
 							$respuestaActualizarIntentos = Data::intentosUsuarioModel($datosController, "usuarios");
- 							header("location:index.php?action=falloInicio");
+ 							header("location:falloInicio");
 						}
 					}
 
@@ -97,7 +97,7 @@ class MvcController{
 						$intentos = 0;
 						$datosController = array("usuarioactual" => $usuario, "actualizarintentos" => $intentos);
 						$respuestaActualizarIntentos = Data::intentosUsuarioModel($datosController, "usuarios");
-						header("location:index.php?action=fallo3intentos");
+						header("location:fallo3intentos");
 					}
 				}
 			}
@@ -148,7 +148,7 @@ class MvcController{
 					$respuesta = Data::actualizarUsuarioModel($datosController, "usuarios");
 
 					if($respuesta == "success"){
-						header("location:index.php?action=cambio");
+						header("location:cambio");
 					}
 					else{
 						echo "error";
@@ -165,10 +165,8 @@ class MvcController{
 				$respuesta = Data::borrarUsuarioModel($datosController, "usuarios");
 
 				if($respuesta == "success"){
-					header("location:index.php?action=usuarios");
+					header("location:usuarios");
 				}
 			}
 		}
 }
-
-?>

@@ -1,0 +1,11 @@
+#Impedir que se pueda ver el listado de contenidos
+#de un directorio
+
+Options All -Indexes
+
+#URL amigables
+#Activar RewriteEngine
+RewriteEngine on
+
+#Reemplaza cualquier palabra que venga en $1
+RewriteRule ^(\w+)$ index.php?action=$1
